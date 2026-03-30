@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>F1 – Velocidade Sem Limites</title>
+ 
+  <!-- Bootstrap CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+ 
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@300;600;900&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet"/>
+ 
+  <style>
+    :root {
+      --red:    #e10600;
+      --dark:   #0a0a0a;
+      --mid:    #141414;
+      --card:   #1a1a1a;
+      --gold:   #c8a84b;
+      --light:  #f0f0f0;
+      --muted:  #888;
+    }
+ 
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      background: var(--dark);
+      color: var(--light);
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+ 
+    /* ── NAVBAR ── */
+    nav.navbar {
+      background: rgba(10,10,10,.95);
+      border-bottom: 2px solid var(--red);
+      letter-spacing: .08em;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+    }
+    .navbar-brand { font-size: 1.7rem; color: var(--red) !important; }
+    .nav-link { color: var(--light) !important; }
+    .nav-link:hover { color: var(--red) !important; }
+ 
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--dark);
+    }
+    #hero img.hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .35;
+    }
+    .hero-stripe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 6px;
+      height: 100%;
+      background: var(--red);
+    }
+    .hero-content { position: relative; z-index: 2; }
+    #hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(3.5rem, 9vw, 8rem);
+      line-height: .95;
+      text-transform: uppercase;
+      letter-spacing: -.02em;
+    }
+    #hero h1 span { color: var(--red); }
+    #hero p.lead {
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      color: #ccc;
+      max-width: 540px;
+      margin-top: 1.2rem;
+    }
+    .btn-f1 {
+      background: var(--red);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .65rem 2.2rem;
+      border: none;
+      transition: background .2s, transform .15s;
+    }
+    .btn-f1:hover { background: #b00400; transform: translateY(-2px); color: #fff; }
+    .btn-outline-f1 {
+      background: transparent;
+      color: var(--red);
+      border: 2px solid var(--red);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .6rem 2rem;
+      transition: all .2s;
+    }
+    .btn-outline-f1:hover { background: var(--red); color: #fff; }
+ 
+    /* ── SECTIONS ── */
+    section { padding: 5rem 0; }
+    .section-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: .85rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: .4rem;
+    }
+    h2.section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      text-transform: uppercase;
+      line-height: 1;
+      letter-spacing: -.01em;
+    }
+    h3.sub-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.6rem;
+      color: var(--gold);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+    .divider {
+      width: 56px;
+      height: 4px;
+      background: var(--red);
+      margin: 1rem 0 1.8rem;
+    }
+ 
+    /* ── VIDEO ── */
+    #video { background: var(--mid); }
+    .video-wrap {
+      position: relative;
+      padding-top: 56.25%;
+      border: 2px solid #2a2a2a;
+      overflow: hidden;
+    }
+    .video-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+ 
+    /* ── HISTORY ── */
+    #historia { background: var(--dark); }
+    .stat-box {
+      background: var(--card);
+      border-left: 3px solid var(--red);
+      padding: 1.4rem 1.6rem;
+    }
+    .stat-box .num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--red);
+      line-height: 1;
+    }
+    .stat-box .label { font-size: .85rem; color: var(--muted); text-transform: uppercase; letter-spacing: .1em; }
+ 
+    /* ── PILOTOS ── */
+    #pilotos { background: var(--mid); }
+    .driver-card {
+      background: var(--card);
+      border-top: 3px solid var(--red);
+      overflow: hidden;
+      transition: transform .25s;
+    }
+    .driver-card:hover { transform: translateY(-6px); }
+    .driver-card img { width: 100%; height: 220px; object-fit: cover; filter: grayscale(30%); }
+    .driver-card .body { padding: 1.2rem; }
+    .driver-card h4 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+    }
+    .driver-card .team { font-size: .85rem; color: var(--muted); }
+    .badge-num {
+      background: var(--red);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 900;
+      font-size: 1.1rem;
+      padding: .15rem .6rem;
+      letter-spacing: .05em;
+    }
+ 
+    /* ── AUDIO ── */
+    #audio-section { background: var(--dark); }
+    .audio-card {
+      background: var(--card);
+      border: 1px solid #2a2a2a;
+      padding: 2rem;
+    }
+    audio { width: 100%; filter: invert(1) hue-rotate(180deg); }
+ 
+    /* ── LINKS ── */
+    #links { background: var(--mid); }
+    .link-tile {
+      display: block;
+      background: var(--card);
+      border: 1px solid #2a2a2a;
+      padding: 1.4rem 1.6rem;
+      color: var(--light);
+      text-decoration: none;
+      transition: border-color .2s, transform .2s;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+    .link-tile:hover { border-color: var(--red); color: var(--red); transform: translateX(6px); }
+    .link-tile .arrow { float: right; color: var(--red); }
+ 
+    /* ── DOM SECTION ── */
+    #dom-interativo { background: var(--dark); }
+    .dom-card {
+      background: var(--card);
+      border: 1px solid #222;
+      padding: 2rem;
+    }
+    #placar-box {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.2rem;
+      color: var(--light);
+    }
+    #placar-box .piloto-item {
+      display: flex;
+      align-items: center;
+      gap: .8rem;
+      padding: .5rem 0;
+      border-bottom: 1px solid #222;
+    }
+    #placar-box .pos { font-size: 1.5rem; font-weight: 900; color: var(--red); width: 28px; }
+    #placar-box .pts { margin-left: auto; color: var(--gold); font-weight: 700; }
+ 
+    #modo-label {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: .25rem .8rem;
+      margin-bottom: 1rem;
+    }
+ 
+    /* ── FOOTER ── */
+    footer {
+      background: #050505;
+      border-top: 2px solid var(--red);
+      color: var(--muted);
+      font-size: .85rem;
+      padding: 2rem 0;
+    }
+    footer a { color: var(--red); text-decoration: none; }
+ 
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp .7s ease both; }
+    .delay-1 { animation-delay: .15s; }
+    .delay-2 { animation-delay: .3s; }
+    .delay-3 { animation-delay: .45s; }
+  </style>
+</head>
+<body>
+ 
+<!-- ══════════════════ NAVBAR ══════════════════ -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand fw-black" href="#">&#9679; F1 UNIVERSE</a>
+    <button class="navbar-toggler border-secondary" type="button"
+      data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item"><a class="nav-link" href="#hero">Início</a></li>
+        <li class="nav-item"><a class="nav-link" href="#video">Vídeo</a></li>
+        <li class="nav-item"><a class="nav-link" href="#historia">História</a></li>
+        <li class="nav-item"><a class="nav-link" href="#pilotos">Pilotos</a></li>
+        <li class="nav-item"><a class="nav-link" href="#audio-section">Áudio</a></li>
+        <li class="nav-item"><a class="nav-link" href="#dom-interativo">Interativo</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+ 
+<!-- ══════════════════ HERO ══════════════════ -->
+<section id="hero">
+  <img class="hero-img"
+    src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Sebastian_Vettel_2012_Malaysia_FP2.jpg/1280px-Sebastian_Vettel_2012_Malaysia_FP2.jpg"
+    alt="Carro de Fórmula 1 em pista"/>
+  <div class="hero-stripe"></div>
+  <div class="container hero-content">
+    <div class="col-lg-9">
+      <p class="section-label fade-up">Temporada 2025</p>
+      <h1 class="fade-up delay-1">VELOCIDADE<br/><span>SEM LIMITES</span></h1>
+      <p class="lead fade-up delay-2">
+        O campeonato mais veloz do planeta. Máquinas de engenharia extrema,
+        pilotos no limite humano e pistas lendárias ao redor do mundo.
+      </p>
+      <div class="d-flex flex-wrap gap-3 mt-4 fade-up delay-3">
+        <a href="#video" class="btn btn-f1">Assistir Agora</a>
+        <a href="#historia" class="btn btn-outline-f1">Saiba Mais</a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════ VÍDEO ══════════════════ -->
+<section id="video">
+  <div class="container">
+    <p class="section-label">Em movimento</p>
+    <h2 class="section-title">Assistir & Sentir</h2>
+    <div class="divider"></div>
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-7">
+        <div class="video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/n5_7Mzf8vKk"
+            title="Formula 1 highlights"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+      <div class="col-lg-5">
+        <h3 class="sub-title">O que é a Fórmula 1?</h3>
+        <p class="mt-3">
+          A Fórmula 1 é o ápice do automobilismo mundial, onde engenharia de ponta
+          e habilidade humana se fundem a mais de <strong>300 km/h</strong>. Cada corrida é
+          um tabuleiro tático de estratégias de pit stop, compostos de pneu e aerodinâmica.
+        </p>
+        <p class="mt-2">
+          Fundada em <strong>1950</strong>, a F1 percorre circuitos históricos como Mônaco,
+          Silverstone e Interlagos, capturando bilhões de fãs ao redor do globo.
+        </p>
+        <a href="https://www.formula1.com" target="_blank" class="btn btn-f1 mt-3">
+          Site Oficial F1 ↗
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════ HISTÓRIA ══════════════════ -->
+<section id="historia">
+  <div class="container">
+    <p class="section-label">Desde 1950</p>
+    <h2 class="section-title">Uma História de Glória</h2>
+    <div class="divider"></div>
+ 
+    <div class="row g-4 mb-5">
+      <div class="col-6 col-md-3"><div class="stat-box"><div class="num">75+</div><div class="label">Anos de história</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-box"><div class="num">24</div><div class="label">Corridas em 2025</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-box"><div class="num">10</div><div class="label">Equipes na grid</div></div></div>
+      <div class="col-6 col-md-3"><div class="stat-box"><div class="num">20</div><div class="label">Pilotos</div></div></div>
+    </div>
+ 
+    <div class="row g-5 align-items-center">
+      <div class="col-lg-6">
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Ayrton_Senna_1990_Monza_crop.jpg/800px-Ayrton_Senna_1990_Monza_crop.jpg"
+          alt="Ayrton Senna na Fórmula 1"
+          class="img-fluid w-100"
+          style="object-fit:cover; height:380px; border-top:3px solid var(--red);"
+        />
+      </div>
+      <div class="col-lg-6">
+        <h3 class="sub-title">Lendas que Definiram a Era</h3>
+        <p class="mt-3">
+          Nomes como <strong>Ayrton Senna</strong>, <strong>Michael Schumacher</strong> e
+          <strong>Lewis Hamilton</strong> transcenderam o esporte e se tornaram ícones da
+          cultura global. Senna, o maior herói brasileiro, venceu 3 campeonatos mundiais
+          e eternizou a paixão nacional pelo esporte.
+        </p>
+        <p class="mt-2">
+          Hoje, novos talentos como <strong>Max Verstappen</strong> e <strong>Lando Norris</strong>
+          empurram os limites do que é possível dentro de um cockpit.
+        </p>
+        <h4 class="mt-4" style="font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold)">
+          Campeonatos Construtores – Top Equipes
+        </h4>
+        <ul class="mt-2" style="list-style:none;padding:0;color:#ccc">
+          <li>🏆 Ferrari — 16 títulos de construtores</li>
+          <li>🏆 Williams — 9 títulos de construtores</li>
+          <li>🏆 McLaren — 8 títulos de construtores</li>
+          <li>🏆 Red Bull Racing — 6 títulos de construtores</li>
+          <li>🏆 Mercedes — 8 títulos de construtores</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════ PILOTOS ══════════════════ -->
+<section id="pilotos">
+  <div class="container">
+    <p class="section-label">Grid 2025</p>
+    <h2 class="section-title">Pilotos em Destaque</h2>
+    <div class="divider"></div>
+    <div class="row g-4">
+ 
+      <div class="col-sm-6 col-lg-3">
+        <div class="driver-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Max_Verstappen_2023_Qatar_GP.jpg/640px-Max_Verstappen_2023_Qatar_GP.jpg" alt="Max Verstappen"/>
+          <div class="body">
+            <span class="badge-num">#1</span>
+            <h4 class="mt-2">Max Verstappen</h4>
+            <p class="team">Red Bull Racing</p>
+            <p class="mt-2" style="font-size:.9rem;color:#aaa">
+              Campeão por 4 temporadas consecutivas, o holandês é o piloto mais dominante da era moderna.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="col-sm-6 col-lg-3">
+        <div class="driver-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Charles_Leclerc_2024_Australian_GP.jpg/640px-Charles_Leclerc_2024_Australian_GP.jpg" alt="Charles Leclerc"/>
+          <div class="body">
+            <span class="badge-num">#16</span>
+            <h4 class="mt-2">Charles Leclerc</h4>
+            <p class="team">Scuderia Ferrari</p>
+            <p class="mt-2" style="font-size:.9rem;color:#aaa">
+              O monegasco lidera a carga da Ferrari com velocidade bruta e uma base de fãs imensa.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="col-sm-6 col-lg-3">
+        <div class="driver-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Lando_Norris_2024_Singapore_GP.jpg/640px-Lando_Norris_2024_Singapore_GP.jpg" alt="Lando Norris"/>
+          <div class="body">
+            <span class="badge-num">#4</span>
+            <h4 class="mt-2">Lando Norris</h4>
+            <p class="team">McLaren F1 Team</p>
+            <p class="mt-2" style="font-size:.9rem;color:#aaa">
+              Jovem britânico transformou a McLaren em candidata ao título e conquistou sua 1ª vitória em 2024.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="col-sm-6 col-lg-3">
+        <div class="driver-card">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Lewis_Hamilton_2016_Malaysia_2.jpg/640px-Lewis_Hamilton_2016_Malaysia_2.jpg" alt="Lewis Hamilton"/>
+          <div class="body">
+            <span class="badge-num">#44</span>
+            <h4 class="mt-2">Lewis Hamilton</h4>
+            <p class="team">Scuderia Ferrari</p>
+            <p class="mt-2" style="font-size:.9rem;color:#aaa">
+              Heptacampeão mundial e o piloto mais vitorioso da história. Em 2025 estreia pela Ferrari.
+            </p>
+          </div>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════ ÁUDIO ══════════════════ -->
+<section id="audio-section">
+  <div class="container">
+    <p class="section-label">Sons da Pista</p>
+    <h2 class="section-title">Ouça a Emoção</h2>
+    <div class="divider"></div>
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="audio-card">
+          <h3 class="sub-title mb-1">Hino Oficial da F1</h3>
+          <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">
+            A icônica trilha sonora que toca antes de cada largada ao redor do mundo.
+          </p>
+          <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg"/>
+            Seu navegador não suporta o elemento de áudio.
+          </audio>
+          <p class="mt-2" style="font-size:.8rem;color:var(--muted)">* Áudio de demonstração (royalty-free)</p>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="audio-card">
+          <h3 class="sub-title mb-1">Motor V10 – Nostalgia</h3>
+          <p style="color:var(--muted);font-size:.9rem;margin-bottom:1rem;">
+            O rugido lendário dos motores V10 que definiram os anos 90 e início dos 2000.
+          </p>
+          <audio controls>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3" type="audio/mpeg"/>
+            Seu navegador não suporta o elemento de áudio.
+          </audio>
+          <p class="mt-2" style="font-size:.8rem;color:var(--muted)">* Áudio de demonstração (royalty-free)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════ LINKS EXTERNOS ══════════════════ -->
+<section id="links">
+  <div class="container">
+    <p class="section-label">Explore Mais</p>
+    <h2 class="section-title">Links Essenciais</h2>
+    <div class="divider"></div>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <a href="https://www.formula1.com" target="_blank" class="link-tile">
+          Site Oficial da F1 <span class="arrow">↗</span>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="https://www.fia.com" target="_blank" class="link-tile">
+          FIA – Federação Internacional <span class="arrow">↗</span>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="https://en.wikipedia.org/wiki/Formula_One" target="_blank" class="link-tile">
+          Wikipedia – Fórmula 1 <span class="arrow">↗</span>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="https://www.autosport.com" target="_blank" class="link-tile">
+          Autosport – Notícias F1 <span class="arrow">↗</span>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="https://www.racefans.net" target="_blank" class="link-tile">
+          RaceFans – Análises &amp; Dados <span class="arrow">↗</span>
+        </a>
+      </div>
+      <div class="col-md-6">
+        <a href="https://www.motorsport.com/f1/" target="_blank" class="link-tile">
+          Motorsport.com – F1 <span class="arrow">↗</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════ DOM INTERATIVO ══════════════════ -->
+<section id="dom-interativo">
+  <div class="container">
+    <p class="section-label">JavaScript DOM</p>
+    <h2 class="section-title">Funções Interativas</h2>
+    <div class="divider"></div>
+    <div class="row g-4">
+ 
+      <!-- Função 1: Placar dinâmico -->
+      <div class="col-lg-6">
+        <div class="dom-card">
+          <h3 class="sub-title mb-1">🏆 Placar de Campeonato</h3>
+          <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.2rem;">
+            Clique no botão para carregar o placar de pilotos dinamicamente no DOM.
+          </p>
+          <button class="btn btn-f1 mb-3" onclick="carregarPlacar()">Carregar Placar</button>
+          <button class="btn btn-outline-f1 mb-3 ms-2" onclick="limparPlacar()">Limpar</button>
+          <div id="placar-box"></div>
+        </div>
+      </div>
+ 
+      <!-- Função 2: Modo Noturno / Diurno -->
+      <div class="col-lg-6">
+        <div class="dom-card">
+          <h3 class="sub-title mb-1">🌓 Tema da Página</h3>
+          <p style="color:var(--muted);font-size:.9rem;margin-bottom:1.2rem;">
+            Alterne entre o modo escuro e o modo claro da landing page via manipulação direta do DOM.
+          </p>
+          <div id="modo-label">Modo Atual: ESCURO</div><br/>
+          <button class="btn btn-f1" onclick="alternarTema()">Alternar Tema</button>
+          <p class="mt-4" style="font-size:.9rem;color:#aaa">
+            Esta função troca variáveis CSS no elemento <code style="color:var(--red)">:root</code>
+            e atualiza textos e classes Bootstrap diretamente via JavaScript —
+            sem recarregar a página.
+          </p>
+        </div>
+      </div>
+ 
+    </div>
+  </div>
+</section>
+ 
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+    <div>
+      <strong style="color:var(--red);font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;">&#9679; F1 UNIVERSE</strong>
+      <p class="mb-0 mt-1">© 2025 · Página educacional · Todos os direitos reservados.</p>
+    </div>
+    <div class="d-flex gap-3 flex-wrap">
+      <a href="https://www.formula1.com" target="_blank">Formula1.com</a>
+      <a href="https://www.fia.com" target="_blank">FIA.com</a>
+      <a href="https://en.wikipedia.org/wiki/Formula_One" target="_blank">Wikipedia</a>
+    </div>
+  </div>
+</footer>
+ 
+<!-- ══════════════════ JAVASCRIPT ══════════════════ -->
+<script>
+  /* ─────────────────────────────────────────────
+     FUNÇÃO 1 — Carrega placar de pilotos no DOM
+  ───────────────────────────────────────────── */
+  function carregarPlacar() {
+    const placar = [
+      { pos: 1, nome: 'Max Verstappen',   equipe: 'Red Bull',  pts: 394 },
+      { pos: 2, nome: 'Lando Norris',     equipe: 'McLaren',   pts: 331 },
+      { pos: 3, nome: 'Charles Leclerc',  equipe: 'Ferrari',   pts: 307 },
+      { pos: 4, nome: 'Carlos Sainz',     equipe: 'Williams',  pts: 244 },
+      { pos: 5, nome: 'Lewis Hamilton',   equipe: 'Ferrari',   pts: 211 },
+    ];
+ 
+    const box = document.getElementById('placar-box');
+ 
+    // Limpa conteúdo anterior
+    box.innerHTML = '';
+ 
+    // Cria elementos dinamicamente para cada piloto
+    placar.forEach(function(p) {
+      const item = document.createElement('div');
+      item.className = 'piloto-item';
+      item.innerHTML = `
+        <span class="pos">${p.pos}</span>
+        <div>
+          <strong>${p.nome}</strong>
+          <div style="font-size:.8rem;color:var(--muted)">${p.equipe}</div>
+        </div>
+        <span class="pts">${p.pts} pts</span>
+      `;
+      box.appendChild(item);
+    });
+ 
+    // Insere cabeçalho acima da lista
+    const header = document.createElement('p');
+    header.style.cssText = 'font-size:.8rem;color:var(--muted);margin-bottom:.6rem;text-transform:uppercase;letter-spacing:.1em';
+    header.textContent = 'Classificação — Temporada 2024';
+    box.insertBefore(header, box.firstChild);
+  }
+ 
+  function limparPlacar() {
+    document.getElementById('placar-box').innerHTML = '';
+  }
+ 
+ 
+  /* ─────────────────────────────────────────────
+     FUNÇÃO 2 — Alterna tema claro / escuro no DOM
+  ───────────────────────────────────────────── */
+  let modoClaro = false;
+ 
+  function alternarTema() {
+    const root  = document.documentElement;
+    const label = document.getElementById('modo-label');
+    const nav   = document.querySelector('nav.navbar');
+ 
+    if (!modoClaro) {
+      // Aplica modo claro sobrescrevendo as variáveis CSS no root
+      root.style.setProperty('--dark',  '#f4f4f4');
+      root.style.setProperty('--mid',   '#e5e5e5');
+      root.style.setProperty('--card',  '#ffffff');
+      root.style.setProperty('--light', '#111111');
+      root.style.setProperty('--muted', '#555555');
+ 
+      // Atualiza navbar
+      nav.style.background = 'rgba(255,255,255,.97)';
+ 
+      // Atualiza label
+      label.textContent = 'Modo Atual: CLARO';
+      label.style.background = '#111';
+ 
+      modoClaro = true;
+    } else {
+      // Restaura modo escuro
+      root.style.setProperty('--dark',  '#0a0a0a');
+      root.style.setProperty('--mid',   '#141414');
+      root.style.setProperty('--card',  '#1a1a1a');
+      root.style.setProperty('--light', '#f0f0f0');
+      root.style.setProperty('--muted', '#888888');
+ 
+      nav.style.background = 'rgba(10,10,10,.95)';
+ 
+      label.textContent = 'Modo Atual: ESCURO';
+      label.style.background = 'var(--red)';
+ 
+      modoClaro = false;
+    }
+  }
+</script>
+ 
+</body>
+</html>
